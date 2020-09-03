@@ -272,6 +272,15 @@ function _callback_switchNewMessage($user, $user_id, $message, $payload, $attach
         bot_sendMessage($user_id, $msg, Consts::get_buts('clear'));
         bot_sendMessage($user_id, QUESTION_KEYBOARD_MAIN_MENU, Consts::get_buts('main_menu'));
         break;
+      case 'main_menu_2':
+        bot_sendLastKeyboard($user_id, $last_keyboard);
+        break;
+      case 'main_menu_3':
+        bot_sendLastKeyboard($user_id, $last_keyboard);
+        break;
+      case 'main_menu_4':
+        bot_sendLastKeyboard($user_id, $last_keyboard);
+        break;
     }
 }
 function bot_sendLastKeyboard($user_id, $last_keyboard)
