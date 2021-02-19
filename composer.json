@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php-di/php-di": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2",
+        "codeception/codeception": "^4.1"
+    }
+}
