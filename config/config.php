@@ -1,6 +1,6 @@
 <?php
-define('CALLBACK_API_CONFIRMATION_TOKEN', CALLBACK_API_CONFIRMATION_TOKEN); //Строка для подтверждения адреса сервера из настроек Callback API
-define('VK_API_ACCESS_TOKEN', VK_API_ACCESS_TOKEN); //Ключ доступа сообщества
+define('CALLBACK_API_CONFIRMATION_TOKEN', 'example'); //Строка для подтверждения адреса сервера из настроек Callback API
+define('VK_API_ACCESS_TOKEN', 'example'); //Ключ доступа сообщества
 
 define('VK_API_VERSION', '5.122'); //Используемая версия API
 
