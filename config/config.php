@@ -1,8 +1,9 @@
 <?php
+
+use Monolog\Logger;
+
 define('CALLBACK_API_CONFIRMATION_TOKEN', 'example'); //Строка для подтверждения адреса сервера из настроек Callback API
 define('VK_API_ACCESS_TOKEN', 'example'); //Ключ доступа сообщества
-
-define('VK_API_VERSION', '5.122'); //Используемая версия API
 
 define('HOST', 'localhost');
 define('USERNAME', 'f0460625');
@@ -11,6 +12,10 @@ define('DATABASE_NAME', 'f0460625');
 
 define('CALLBACK_API_EVENT_CONFIRMATION', 'confirmation');
 define('CALLBACK_API_EVENT_MESSAGE_NEW', 'message_new');
+
+define('LOGGER_NAME', 'app_all_shit');
+define('LOGGER_PATH', __DIR__ . '/../app_all_shit.log');
+define('LOGGER_LEVEL', Logger::DEBUG);
 
 //class Consts
 //{
