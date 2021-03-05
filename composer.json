@@ -13,7 +13,6 @@
     "autoload": {
         "psr-4": {
             "SRC\\": "src/",
-            "API\\": "api/",
             "Config\\": "config/",
             "Logs\\": "logs/"
         }
