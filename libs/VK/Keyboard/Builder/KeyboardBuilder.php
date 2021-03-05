@@ -6,20 +6,28 @@ namespace Libs\VK\Keyboard;
 use Libs\VK\VK;
 use Libs\VK\Keyboard\Buttons\ButtonsCollection;
 
-class Keyboard
+class KeyboardBuilder implements Builder
 {
     protected bool $oneTime = false;
     protected ButtonsCollection $buttons;
     protected bool $inline = false;
 
-    public function __construct(bool $oneTime, ButtonsCollection $buttons, bool $inline)
+    public function setOneTime(bool $oneTime): void
     {
         $this->oneTime = $oneTime;
-        $this->buttons = $buttons;
+    }
+
+    public function setInline(bool $inline): void
+    {
         $this->inline = $inline;
     }
 
-    public function toArray(): array
+    public function setButtons(ButtonsCollection $buttons): void
+    {
+        $this->buttons = $buttons;
+    }
+
+    protected function toArray(): array
     {
         return [
             'one_time' => $this->oneTime,

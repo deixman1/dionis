@@ -16,9 +16,9 @@ class VK
 
     private Curl $curl;
 
-    public function __construct()
+    public function __construct(Curl $curl)
     {
-        $this->curl = new Curl();
+        $this->curl = $curl;
     }
 
     protected function call(string $method, array $params): ?string
