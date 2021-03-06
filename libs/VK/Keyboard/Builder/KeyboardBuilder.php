@@ -50,6 +50,15 @@ class KeyboardBuilder
     }
 
     /**
+     */
+    public function addNewLine(): KeyboardBuilder
+    {
+        $this->buttons[] = [];
+        $this->setButtonsInKeyboard($this->buttons);
+        return $this;
+    }
+
+    /**
      * @param array $buttons
      */
     public function setButtonsInKeyboard(array $buttons): void
@@ -58,19 +67,11 @@ class KeyboardBuilder
     }
 
     /**
-     */
-    public function addNewLine(): void
-    {
-        $this->buttons[] = [];
-        $this->setButtonsInKeyboard($this->buttons);
-    }
-
-    /**
      * @param string $label
      * @param string $payload
      * @param string $color
      */
-    public function addButtonText(string $label, string $payload, string $color = ''): void
+    public function addButtonText(string $label, string $payload, string $color = ''): KeyboardBuilder
     {
         $this->typeText->setLabel($label);
         $this->typeText->setPayload($payload);
@@ -80,6 +81,7 @@ class KeyboardBuilder
         }
         $this->addButton($this->button->toArray());
         $this->setButtonsInKeyboard($this->buttons);
+        return $this;
     }
 
     /**
