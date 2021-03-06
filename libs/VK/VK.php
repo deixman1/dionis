@@ -6,29 +6,60 @@ namespace Libs\VK;
 
 use Curl\Curl;
 use Exception;
+use Libs\VK\Message\Message;
 
-class VK
+class VK implements VKInterface
 {
     private const CALLBACK_API_CONFIRMATION_TOKEN = CALLBACK_API_CONFIRMATION_TOKEN;
     private const VK_API_ACCESS_TOKEN = VK_API_ACCESS_TOKEN;
     private const VK_API_ENDPOINT = 'https://api.vk.com/method/';
-    private const VK_API_VERSION = 5.122;
+    private const VK_API_VERSION = 5.130;
 
+    /**
+     * @var Curl
+     */
     private Curl $curl;
+    /**
+     * @var Message
+     */
+    private Message $message;
 
-    public function __construct(Curl $curl)
+    public function __construct()
     {
-        $this->curl = $curl;
+        $this->curl = new Curl();
+        $this->message = new Message();
     }
 
-    protected function call(string $method, array $params): ?string
+    /**
+     * @return Message
+     */
+    public function getMessage(): Message
+    {
+        return $this->message;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getConfirmationToken(): string
+    {
+        return self::CALLBACK_API_CONFIRMATION_TOKEN;
+    }
+
+    /**
+     * @param string $method
+     * @param array $params
+     * @return string
+     * @throws Exception
+     */
+    public function call(string $method, array $params): string
     {
         $params['access_token'] = self::VK_API_ACCESS_TOKEN;
         $params['v'] = self::VK_API_VERSION;
 
         $this->curl->setOpt(CURLOPT_RETURNTRANSFER, true);
 
-        $this->curl->get(self::VK_API_ENDPOINT.$method, $params);
+        $this->curl->get(self::VK_API_ENDPOINT . $method, $params);
 
         if ($this->curl->error) {
             throw new Exception("Failed {$method} request\n{$this->curl->error}");

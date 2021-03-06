@@ -1,21 +1,15 @@
 <?php
 
-namespace Libs\VK\Keyboard\Buttons\Action\Type;
+namespace Libs\VK\Buttons\Action\Type;
 
 
-use Libs\VK\Keyboard\Buttons\Action\ActionAbstract;
+use Libs\VK\Buttons\Action\Action;
 
-class Text extends ActionAbstract
+class Text implements Action
 {
     protected string $type = 'text';
     protected string $label;
     protected string $payload;
-
-    public function __construct(string $label, string $payload)
-    {
-        $this->label = $label;
-        $this->payload = $payload;
-    }
 
     public function toArray(): array
     {
@@ -24,5 +18,21 @@ class Text extends ActionAbstract
             'label' => $this->label,
             'payload' => $this->payload,
         ];
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label): void
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @param string $payload
+     */
+    public function setPayload(string $payload): void
+    {
+        $this->payload = $payload;
     }
 }

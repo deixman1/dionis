@@ -3,27 +3,44 @@
 namespace Libs\VK\Keyboard;
 
 
-use Libs\VK\VK;
-use Libs\VK\Keyboard\Buttons\ButtonsCollection;
-
 class Keyboard
 {
-    protected bool $oneTime = false;
-    protected ButtonsCollection $buttons;
-    protected bool $inline = false;
+    private bool $oneTime = false;
+    private array $buttons;
+    private bool $inline = false;
 
-    public function __construct(bool $oneTime, ButtonsCollection $buttons, bool $inline)
+    /**
+     * @param bool $oneTime
+     */
+    public function setOneTime(bool $oneTime): void
     {
         $this->oneTime = $oneTime;
+    }
+
+    /**
+     * @param array $buttons
+     */
+    public function setButtons(array $buttons): void
+    {
         $this->buttons = $buttons;
+    }
+
+    /**
+     * @param bool $inline
+     */
+    public function setInline(bool $inline): void
+    {
         $this->inline = $inline;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
             'one_time' => $this->oneTime,
-            'buttons' => $this->buttons->toArray(),
+            'buttons' => $this->buttons,
             'inline' => $this->inline,
         ];
     }

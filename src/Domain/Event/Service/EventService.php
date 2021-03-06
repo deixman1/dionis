@@ -2,24 +2,21 @@
 
 namespace SRC\Domain\Event\Service;
 
-use Libs\VK\Messages\Messages;
-use Psr\Log\LoggerInterface;
+use Libs\VK\VK;
 
 class EventService
 {
-    private LoggerInterface $logger;
-    private Messages $messages;
+    private VK $vk;
 
 
-    public function __construct(LoggerInterface $logger, Messages $messages)
+    public function __construct(VK $vk)
     {
-        $this->logger = $logger;
-        $this->messages = $messages;
+        $this->vk = $vk;
     }
 
     public function confirmation(): string
     {
-        return 'ok';
+        return $this->vk->getConfirmationToken();
     }
 
     public function message_new(): string

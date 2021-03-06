@@ -12,8 +12,8 @@ class EventDTOAssembler
     public function toDTO(array $array): EventDTO
     {
         $DTO = new EventDTO();
-        $DTO->setType($array[self::EVENT_TYPE]);
-        $DTO->setType($array[self::EVENT_OBJECT]);
+        $DTO->setType($array[self::EVENT_TYPE] ?? '');
+        $DTO->setObject($array[self::EVENT_OBJECT] ?? '');
         return $DTO;
     }
 }
