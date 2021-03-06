@@ -2,6 +2,7 @@
 
 namespace SRC\Domain\Event\Service;
 
+use Libs\VK\Buttons\Button;
 use Libs\VK\VKInterface;
 
 class EventService
@@ -16,7 +17,9 @@ class EventService
 
     public function confirmation(): string
     {
-        $this->vk->getMessage()->getKeyboardBuilder()->addNewLine()->addButtonText('asd','asd','asda');
+        $this->vk->getMessage()->getKeyboardBuilder()
+            ->addNewLine()
+            ->addButtonText(WHAT_DO_YOU_SEARCH,'WHAT_DO_YOU_SEARCH',Button::BUTTON_POSITIVE);
         return $this->vk->getConfirmationToken();
     }
 
