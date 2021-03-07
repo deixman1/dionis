@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace Libs\VK\Buttons\Action\Type;
+namespace Libs\VK\Keyboard\Buttons\Action\Type;
 
 
-use Libs\VK\Buttons\Action\Action;
+use Libs\VK\Keyboard\Buttons\Action\Action;
 
 class Text implements Action
 {

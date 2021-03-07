@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Libs\VK\Message;
 
@@ -137,17 +137,8 @@ class Message extends VK
      */
     public function send(): string
     {
-        return $this->call(self::METHOD_SEND, $this->toArray());
+        return parent::call(self::METHOD_SEND, $this->toArray());
     }
-
-    /**
-     * @return KeyboardBuilder
-     */
-    public function getKeyboardBuilder(): KeyboardBuilder
-    {
-        return new KeyboardBuilder($this->keyboard);
-    }
-
 
     public function toArray(): array
     {
@@ -176,5 +167,13 @@ class Message extends VK
             'intent' => $this->intent ?? '',
             'subscribe_id' => $this->subscribeId ?? '',
         ];
+    }
+
+    /**
+     * @return KeyboardBuilder
+     */
+    public function getKeyboardBuilder(): KeyboardBuilder
+    {
+        return new KeyboardBuilder($this->keyboard);
     }
 }

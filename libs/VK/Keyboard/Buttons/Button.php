@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace Libs\VK\Buttons;
+namespace Libs\VK\Keyboard\Buttons;
 
 
-use Libs\VK\Buttons\Action\Action;
+use Libs\VK\Keyboard\Buttons\Action\Action;
 
 class Button
 {

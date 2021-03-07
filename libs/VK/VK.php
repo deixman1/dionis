@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Libs\VK;
 
@@ -16,26 +16,11 @@ class VK implements VKInterface
     private const VK_API_VERSION = 5.130;
 
     /**
-     * @var Curl
-     */
-    private Curl $curl;
-    /**
-     * @var Message
-     */
-    private Message $message;
-
-    public function __construct()
-    {
-        $this->curl = new Curl();
-        $this->message = new Message();
-    }
-
-    /**
      * @return Message
      */
     public function getMessage(): Message
     {
-        return $this->message;
+        return new Message();
     }
 
     /**
@@ -54,18 +39,19 @@ class VK implements VKInterface
      */
     public function call(string $method, array $params): string
     {
+        $curl = new Curl();
         $params['access_token'] = self::VK_API_ACCESS_TOKEN;
         $params['v'] = self::VK_API_VERSION;
 
-        $this->curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+        $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
 
-        $this->curl->get(self::VK_API_ENDPOINT . $method, $params);
+        $curl->get(self::VK_API_ENDPOINT . $method, $params);
 
-        if ($this->curl->error) {
-            throw new Exception("Failed {$method} request\n{$this->curl->error}");
+        if ($curl->error) {
+            throw new Exception("Failed {$method} request\n{$curl->error}");
         }
 
-        return $this->curl->response;
+        return $curl->response;
     }
 
 //    function vkApi_messagesSend($data = array())
