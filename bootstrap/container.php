@@ -1,11 +1,19 @@
 <?php
 
-$builder = new \DI\ContainerBuilder();
+require_once __DIR__ . "/../vendor/autoload.php";
+
+use DI\ContainerBuilder;
+use Slim\Factory\AppFactory;
+
+$builder = new ContainerBuilder;
 
 $builder->useAnnotations(false);
 $builder->useAutowiring(false);
 
-$dependencies = require_once __DIR__ . 'dependencies.php';
+$dependencies = include __DIR__ . '/dependencies.php';
 $dependencies($builder);
-$routers = require_once __DIR__ . 'routes.php';
-$routers($builder);
+
+$container = $builder->build();
+
+AppFactory::setContainer($container);
+return AppFactory::create();
