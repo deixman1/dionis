@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SRC\Application\Actions;
 
@@ -18,8 +19,6 @@ abstract class Action
         $this->logger = $logger;
     }
 
-    abstract protected function action(): ResponseInterface;
-
     public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $this->request = $request;
@@ -27,6 +26,8 @@ abstract class Action
         $this->args = $args;
         return $this->action();
     }
+
+    abstract protected function action(): ResponseInterface;
 
     protected function getParam(string $name, $default = null)
     {

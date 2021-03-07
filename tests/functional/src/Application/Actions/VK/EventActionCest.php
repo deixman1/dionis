@@ -1,25 +1,32 @@
 <?php
 declare(strict_types=1);
 
+namespace functional\src\Application\Actions\VK;
+
 use Codeception\Stub;
+use FunctionalTester;
 use Helper\Essential\Request\RequestFixturesFactory;
 use Helper\Essential\Response\ResponseFixturesFactory;
 use Helper\Essential\Stubs\Api\Request\EventActionRequestStubs;
+use Helper\Essential\Stubs\Api\Response\EventActionResponseStubs;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use SRC\Application\Actions\VK\EventAction;
 use SRC\Domain\Event\Assembler\EventDTOAssembler;
 use SRC\Domain\Event\Service\EventService;
-use Helper\FunctionalTesterBase;
 
-class EventActionCest extends FunctionalTesterBase
+class EventActionCest
 {
-    private FunctionalTester $tester;
+    protected FunctionalTester $tester;
     private LoggerInterface $logger;
     private EventDTOAssembler $eventDTOAssembler;
     private EventService $eventService;
+    private ContainerInterface $container;
 
-    protected function _before()
+    public function _before(FunctionalTester $tester)
     {
+        $this->tester = $tester;
+        $this->container = getContainer();
         $this->logger = Stub::makeEmpty(LoggerInterface::class);
         $this->eventDTOAssembler = $this->container->get(EventDTOAssembler::class);
         $this->eventService = $this->container->get(EventService::class);
@@ -32,15 +39,15 @@ class EventActionCest extends FunctionalTesterBase
             $this->eventDTOAssembler,
             $this->eventService
         );
-        $result = $eventAction->__invoke(
+        $result = json_decode((string)$eventAction->__invoke(
             RequestFixturesFactory::createRequestWithQueryData(
                 'GET',
                 EventActionRequestStubs::getDataEventConfirmation()
             ),
             ResponseFixturesFactory::createEmptyResponse(),
             []
-        );
-        dd($result);
+        )->getBody(), true);
+        $this->tester->assertEquals(EventActionResponseStubs::getDataEventConfirmationResult(), $result);
     }
 
 }

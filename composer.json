@@ -17,12 +17,14 @@
         "psr-4": {
             "SRC\\": "src/",
             "Config\\": "config/",
-            "Logs\\": "logs/"
+            "Logs\\": "logs/",
+            "Libs\\": "libs/"
         }
     },
     "require-dev": {
-        "codeception/codeception": "^4.1",
-        "codeception/module-phpbrowser": "^1.0",
-        "codeception/module-asserts": "^1.3"
+        "codeception/codeception": "*",
+        "codeception/module-phpbrowser": "*",
+        "codeception/module-asserts": "*",
+      "ext-json": "*"
     }
 }

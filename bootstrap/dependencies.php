@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
+use Libs\VK\VK;
+use Libs\VK\VKInterface;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
@@ -19,7 +21,10 @@ return static function (ContainerBuilder $containerBuilder) {
                 $logger->pushHandler($handler);
 
                 return $logger;
-            }
+            },
+            VKInterface::class => static function (ContainerInterface $c) {
+                return new VK();
+            },
         ]
     );
 };

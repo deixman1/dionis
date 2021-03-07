@@ -2,10 +2,10 @@
 
 use Psr\Container\ContainerInterface;
 
-function setUpDi(): ContainerInterface
+function getContainer(): ContainerInterface
 {
-    $app = require_once __DIR__ . '/../bootstrap/container.php';
-    /** @var Slim\App $app */
+    $app = require __DIR__ . '/../bootstrap/container.php'; //TODO Вернуть предыдущее состояние
 
+    /** @var Slim\App $app */
     return $app->getContainer();
 }
