@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Libs\VK\Message;
 
 
+use Libs\VK\Keyboard\Builder\KeyboardBuilder;
 use Libs\VK\Keyboard\Keyboard;
 use Libs\VK\VK;
-use SRC\Domain\Event\Builder\KeyboardBuilder;
 
 class Message extends VK
 {

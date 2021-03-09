@@ -1,10 +1,10 @@
 <?php
 
-namespace SRC\Domain\Event\Builder;
+namespace Libs\VK\Keyboard\Builder;
 
 
-use Libs\VK\Buttons\Action\Type\Text;
-use Libs\VK\Buttons\Button;
+use Libs\VK\Keyboard\Buttons\Action\Type\Text;
+use Libs\VK\Keyboard\Buttons\Button;
 use Libs\VK\Keyboard\Keyboard;
 
 class KeyboardBuilder
