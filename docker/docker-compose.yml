@@ -1,0 +1,54 @@
+version: "3.7"
+networks:
+  dionis_network:
+    name: dionis_network
+services:
+  nginx:
+    container_name: dionis_nginx
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./../:/var/www/html
+    networks:
+      - dionis_network
+  php:
+    container_name: dionis_php
+    build:
+      context: ./php/
+      dockerfile: Dockerfile
+    image: dionis/php
+    depends_on:
+      - mysql
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./../:/var/www/html
+    networks:
+      - dionis_network
+  mysql:
+    container_name: dionis_mysql
+    image: mysql:8.0.29
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1
+      - MYSQL_DATABASE=database
+    networks:
+      - dionis_network
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: dionis_phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_ARBITRARY=1
+    depends_on:
+      - mysql
+    networks:
+      - dionis_network
